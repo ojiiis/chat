@@ -1,0 +1,9 @@
+{
+  "scripts": {
+    "start": "nodemon test.js"
+  },
+  "dependencies": {
+    "nodemon": "^3.1.4",
+    "ojparty": "^3.0.4"
+  }
+}
