@@ -33,7 +33,8 @@ app.get("/signup",(req,res)=>{
 app.post("/signup",async (req,res)=>{
     var out = {
         status:"",
-        errors:[]
+        errors:[],
+        redirect:""
     };
     const {username,email,password,ref} = req.body;
      try{
@@ -55,13 +56,10 @@ if(out.errors.length < 1){
         const api_key = ojp.ojparty.utill.random("mix",28);
       
       await req.sql(con,query,[username,email,password,api_key,new Date().getTime()])
+      req.setSession('user_id',api_key)
       out.status = "success"
-      
-      out = {
-            "status":'',
-            "errors":['error 1','error 2','error 3']
-        }
-       res.send(JSON.stringify(out))
+      out.redirect = "./"
+      res.send(JSON.stringify(out))
        
     }catch(e){
         out.status = "error";
